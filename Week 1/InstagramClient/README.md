@@ -16,5 +16,5 @@ All task completed:
  
 Screens:
 
-<img src="/walkthrough.gif" width="250" />
+<img src="/Week 1/InstagramClient/walkthrough.gif" width="250" />
  
