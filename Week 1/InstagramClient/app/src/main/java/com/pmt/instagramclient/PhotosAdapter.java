@@ -8,12 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pmt.utils.CircleTransform;
+import com.pmt.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import com.pmt.instagramclient.utils.CircleTransform;
-import com.pmt.utils.Utils;
 
 /**
  * Created by thuypm on 09/03/2016.
@@ -58,9 +57,9 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         viewHolder.tvLikes.setText(Utils.getLikesString(photo.likesCount));
         viewHolder.tvCreateTimes.setText(Utils.getTimeString(photo.createTime));
         viewHolder.ivPhoto.setImageResource(0);
-        Picasso.with(getContext()).load(photo.imageUrl).into(viewHolder.ivPhoto);
+        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.loading).error(R.drawable.error).into(viewHolder.ivPhoto);
         viewHolder.ivAvatar.setImageResource(0);
-        Picasso.with(getContext()).load(photo.avatar).transform(new CircleTransform()).into(viewHolder.ivAvatar);
+        Picasso.with(getContext()).load(photo.avatar).placeholder(R.drawable.error).error(R.drawable.error).transform(new CircleTransform()).into(viewHolder.ivAvatar);
         return convertView;
     }
 }
