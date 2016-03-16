@@ -45,17 +45,29 @@ public class PhotosActivity extends AppCompatActivity {
 
                 try {
                     photosJSON = response.getJSONArray("data");
+                    JSONObject temple = null;
                     for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
                         String type = photoJSON.getString("type");
                         if (type.equals("image")) {
                             Photo photo = new Photo();
-                            photo.userName = photoJSON.getJSONObject("user").getString("username");
-                            photo.avatar = photoJSON.getJSONObject("user").getString("profile_picture");
-                            photo.caption = photoJSON.getJSONObject("caption").getString("text");
-                            photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
-                            photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
-                            photo.likesCount = photoJSON.getJSONObject("likes").getInt("count");
+                            temple = photoJSON.getJSONObject("user");
+                            if(temple != null){
+                                photo.userName = temple.getString("username");
+                                photo.avatar = temple.getString("profile_picture");
+                            }
+                            temple = photoJSON.getJSONObject("caption");
+                            if(temple != null){
+                                photo.caption = temple.getString("text");
+                            }
+                            temple = photoJSON.getJSONObject("images");
+                            if(temple != null){
+                                photo.imageUrl = temple.getJSONObject("standard_resolution").getString("url");
+                                photo.imageHeight = temple.getJSONObject("standard_resolution").getInt("height");
+                            }temple = photoJSON.getJSONObject("likes");
+                            if(temple != null){
+                                photo.likesCount = temple.getInt("count");
+                            }
                             photo.createTime = photoJSON.getLong("created_time");
                             photos.add(photo);
                         }
