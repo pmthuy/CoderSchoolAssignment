@@ -51,6 +51,9 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         String retweet = "";
         if (tweet.retweet) {
             retweet = tweet.retweetUser.getName() + " Retweeted";
+            tvRetweeted.setVisibility(View.GONE);
+        }else{
+            tvRetweeted.setVisibility(View.VISIBLE);
         }
         tvRetweeted.setText(retweet);
         tvUserName.setText(tweet.user.getName());

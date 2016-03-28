@@ -2,7 +2,6 @@ package com.codepath.apps.tweetsclient.models;
 
 import android.util.Log;
 
-import com.codepath.apps.tweetsclient.utils.Utils;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -45,7 +44,7 @@ public class Tweet {
                 jo = jsonObject;
             }
 
-            tweet.body = Utils.URLDecode(jo.getString("text"));
+            tweet.body = jo.getString("text");
             tweet.uid = jo.getLong("id");
             tweet.createAt = jo.getString("created_at");
             tweet.user = User.fromJSON(jo.getJSONObject("user"));

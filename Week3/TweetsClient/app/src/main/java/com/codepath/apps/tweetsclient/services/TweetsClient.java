@@ -2,7 +2,6 @@ package com.codepath.apps.tweetsclient.services;
 
 import android.content.Context;
 
-import com.codepath.apps.tweetsclient.utils.Utils;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -45,7 +44,7 @@ public class TweetsClient extends OAuthBaseClient {
 
 	public void tweetting(String status, AsyncHttpResponseHandler handler){
 		String apiURL = getApiUrl("statuses/update.json");
-		String statusEncode = Utils.URLEncode(status);
+		String statusEncode = status;
 		RequestParams params = new RequestParams();
 		params.put("status", statusEncode);
 		getClient().post(apiURL, params, handler);
@@ -53,7 +52,7 @@ public class TweetsClient extends OAuthBaseClient {
 
 	public void reTweet(String status, long statusId,  AsyncHttpResponseHandler handler){
 		String apiURL = getApiUrl("statuses/update.json");
-		String statusEncode = Utils.URLEncode(status);
+		String statusEncode = status;
 		RequestParams params = new RequestParams();
 		params.put("status", statusEncode);
 		params.put("in_reply_to_status_id", statusId);
